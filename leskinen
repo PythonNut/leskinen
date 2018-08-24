@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+import os
+import sys
+import subprocess
+from pathlib import Path
+
+root = Path(__file__).resolve().parent
+real_script = root / "leskinen.py"
+new_env = os.environ.copy()
+new_env["PIPENV_PIPFILE"] = str(root / "Pipfile")
+subprocess.run(
+    ["pipenv", "run", "python", str(real_script), *sys.argv[1:]], env=new_env
+)
